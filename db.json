@@ -1,0 +1,40 @@
+{
+  "tuotteet": [
+    {
+      "id": "1",
+      "nimi": "Tavara1",
+      "hylly": "1",
+      "kpl": "50"
+    },
+    {
+      "id": "2",
+      "nimi": "Tavara2",
+      "hylly": "2",
+      "kpl": "30"
+    },
+    {
+      "id": "3",
+      "nimi": "Tavara3",
+      "hylly": "1",
+      "kpl": "50"
+    },
+    {
+      "id": "4",
+      "nimi": "Tavara4",
+      "hylly": "3",
+      "kpl": "6"
+    },
+    {
+      "id": "Id",
+      "nimi": "Nimi",
+      "hylly": "Hylly",
+      "kpl": "999"
+    },
+    {
+      "id": "666",
+      "nimi": "testi",
+      "hylly": "3",
+      "kpl": "50"
+    }
+  ]
+}
