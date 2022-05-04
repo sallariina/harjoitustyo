@@ -1,29 +1,69 @@
 import { Component } from "react";
 import React, { useState, useEffect } from "react";
 
+//disabloi id homma
+
 let haku = "";
 let nimihaku = "";
 let hyllyhaku = "";
 let poistettava = "";
+let muokattava = "";
 
 function Varastosovellus(props) {
   async function uusituote() {
-    await fetch("http://localhost:3004/tuotteet", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: uusituoteid,
-        nimi: uusinimi,
-        hylly: uusihylly,
-        kpl: uusikpl,
-      }),
-    }).then((response) => {
-      console.log(response);
+    let response = await fetch(
+      "http://localhost:3004/tuotteet?id=" + muokattava
+    );
+    let data = await response.json();
+
+    if (
+      uusituoteid == "" ||
+      uusinimi == "" ||
+      uusikpl == "" ||
+      uusihylly == ""
+    ) {
+      setLatausTeksti("Täytä kaikki tiedot");
       fetchData();
-      tyhjenna();
-    });
+    } else if (parseInt(uusikpl) > 20) {
+      setLatausTeksti("Kpl-määrä oltava alle 20");
+      fetchData();
+    } else if (data == "") {
+      await fetch("http://localhost:3004/tuotteet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: uusituoteid,
+          nimi: uusinimi,
+          hylly: uusihylly,
+          kpl: uusikpl,
+        }),
+      }).then((response) => {
+        console.log(response);
+        setLatausTeksti("");
+        fetchData();
+        tyhjenna();
+      });
+    } else {
+      await fetch("http://localhost:3004/tuotteet/" + muokattava, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: uusituoteid,
+          nimi: uusinimi,
+          hylly: uusihylly,
+          kpl: uusikpl,
+        }),
+      }).then((response) => {
+        console.log(response);
+        setLatausTeksti("");
+        fetchData();
+        tyhjenna();
+      });
+    }
   }
 
   function tyhjenna() {
@@ -31,6 +71,14 @@ function Varastosovellus(props) {
     setUusinimi("");
     setUusihylly("");
     setUusikpl("");
+  }
+
+  async function muokkaatuotetta(id, nimi, hylly, kpl) {
+    muokattava = id;
+    setUusituoteid(id);
+    setUusinimi(nimi);
+    setUusihylly(hylly);
+    setUusikpl(kpl);
   }
 
   async function poistatuote(id) {
@@ -58,14 +106,14 @@ function Varastosovellus(props) {
       hyllyhaku = "?hylly=" + hylly;
       haku = hyllyhaku;
     }
-    setLatausTeksti("Loading...");
-    setTuotelista([]);
+    /* setLatausTeksti("Loading..."); */
+    /* setTuotelista([]); */
     let response = await fetch("http://localhost:3004/tuotteet" + haku);
     let data = await response.json();
     setTuotelista(data);
     console.log(data);
     console.log(data == []);
-    setLatausTeksti("");
+    /* setLatausTeksti(""); */
     if (data == "") {
       setLatausTeksti("Ei hakutuloksia");
     }
@@ -134,6 +182,7 @@ function Varastosovellus(props) {
           name="uusihylly"
           value={uusihylly}
           onChange={(event) => setUusihylly(event.target.value)}
+          required
         />
         Määrä:
         <input
@@ -145,7 +194,7 @@ function Varastosovellus(props) {
       </form>
       <button onClick={() => uusituote()}>Tallenna</button>
       <br></br>
-
+      {latausTeksti}
       <table>
         <thead>
           <tr>
@@ -153,6 +202,7 @@ function Varastosovellus(props) {
             <th>Nimi:</th>
             <th>Hylly:</th>
             <th>Kpl:</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
@@ -169,11 +219,26 @@ function Varastosovellus(props) {
                   Poista tuote
                 </button>
               </td>
+              <td>
+                <button
+                  onClick={() =>
+                    muokkaatuotetta(
+                      tuote.id,
+                      tuote.nimi,
+                      tuote.hylly,
+                      tuote.kpl
+                    )
+                  }
+                  id={tuote.id}
+                >
+                  Muokkaa tuotetta
+                </button>
+              </td>
             </tbody>
           );
         })}
       </table>
-      {latausTeksti}
+
       <br />
       <p></p>
     </div>
