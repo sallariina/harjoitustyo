@@ -1,6 +1,7 @@
 import { Component } from "react";
 import React, { useState, useEffect } from "react";
 
+//muistilistaa: 
 //disabloi id homma
 
 let haku = "";
@@ -106,14 +107,11 @@ function Varastosovellus(props) {
       hyllyhaku = "?hylly=" + hylly;
       haku = hyllyhaku;
     }
-    /* setLatausTeksti("Loading..."); */
-    /* setTuotelista([]); */
     let response = await fetch("http://localhost:3004/tuotteet" + haku);
     let data = await response.json();
     setTuotelista(data);
     console.log(data);
     console.log(data == []);
-    /* setLatausTeksti(""); */
     if (data == "") {
       setLatausTeksti("Ei hakutuloksia");
     }
