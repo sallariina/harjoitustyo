@@ -1,8 +1,8 @@
 import { Component } from "react";
 import React, { useState, useEffect } from "react";
-
-//muistilistaa: 
-//disabloi id homma
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 let haku = "";
 let nimihaku = "";
@@ -151,7 +151,10 @@ function Varastosovellus(props) {
           onChange={(event) => setHylly(event.target.value)}
         />
       </form>
-      <button onClick={() => fetchData()}>Hae</button>
+      <br></br>
+      <Button variant="primary" onClick={() => fetchData()}>
+        Hae
+      </Button>
       <br></br>
 
       <form>
@@ -190,55 +193,63 @@ function Varastosovellus(props) {
           onChange={(event) => setUusikpl(event.target.value)}
         />
       </form>
-      <button onClick={() => uusituote()}>Tallenna</button>
+      <br></br>
+      <Button variant="primary" onClick={() => uusituote()}>
+        Tallenna
+      </Button>
+      <br></br>
       <br></br>
       {latausTeksti}
-      <table>
+      <Table striped hover size="sm" responsive>
         <thead>
-          <tr>
-            <th>Id:</th>
-            <th>Nimi:</th>
-            <th>Hylly:</th>
-            <th>Kpl:</th>
+          <tr className="table-info">
+            <th>Id</th>
+            <th>Nimi</th>
+            <th>Hylly</th>
+            <th>Kpl</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
-
         {tuotelista.map((tuote) => {
           return (
             <tbody id="tableBody" key={tuote.id}>
-              <td>{tuote.id}</td>
-              <td>{tuote.nimi}</td>
-              <td>{tuote.hylly}</td>
-              <td>{tuote.kpl}</td>
-              <td>
-                <button onClick={() => poistatuote(tuote.id)} id={tuote.id}>
-                  Poista tuote
-                </button>
-              </td>
-              <td>
-                <button
-                  onClick={() =>
-                    muokkaatuotetta(
-                      tuote.id,
-                      tuote.nimi,
-                      tuote.hylly,
-                      tuote.kpl
-                    )
-                  }
-                  id={tuote.id}
-                >
-                  Muokkaa tuotetta
-                </button>
-              </td>
+              <tr>
+                {" "}
+                <td className="table-info">{tuote.id}</td>
+                <td>{tuote.nimi}</td>
+                <td>{tuote.hylly}</td>
+                <td>{tuote.kpl}</td>
+                <td>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => poistatuote(tuote.id)}
+                    id={tuote.id}
+                  >
+                    Poista tuote
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() =>
+                      muokkaatuotetta(
+                        tuote.id,
+                        tuote.nimi,
+                        tuote.hylly,
+                        tuote.kpl
+                      )
+                    }
+                    id={tuote.id}
+                  >
+                    Muokkaa tuotetta
+                  </Button>
+                </td>
+              </tr>
             </tbody>
           );
-        })}
-      </table>
-
-      <br />
-      <p></p>
+        })}{" "}
+      </Table>
     </div>
   );
 }

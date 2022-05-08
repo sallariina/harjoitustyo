@@ -37,20 +37,13 @@
   }
 }
 
-table {
+/* table {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   table-layout: fixed;
   border-collapse: collapse;
   background-color: white;
-}
-
-table,
-th,
-td {
-  text-align: center;
-  border: solid black 1px;
 }
 
 body {
@@ -65,19 +58,16 @@ form {
   place-items: left;
 }
 
-button{
+/* button {
   padding-right: 10px;
   padding-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 2px;
   margin-right: 2px;
-}
+} */
 
-input{
+input {
   margin-left: 5px;
   margin-right: 5px;
 }
-
-
-

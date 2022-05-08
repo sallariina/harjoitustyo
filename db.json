@@ -25,16 +25,10 @@
       "kpl": "6"
     },
     {
-      "id": "Id",
-      "nimi": "Nimi",
-      "hylly": "Hylly",
-      "kpl": "999"
-    },
-    {
-      "id": "666",
-      "nimi": "testi",
-      "hylly": "3",
-      "kpl": "50"
+      "id": "9",
+      "nimi": "tuote",
+      "hylly": "hylly",
+      "kpl": "9"
     }
   ]
 }
