@@ -25,8 +25,8 @@ function Varastosovellus(props) {
     ) {
       setLatausTeksti("Täytä kaikki tiedot");
       fetchData();
-    } else if (parseInt(uusikpl) > 20) {
-      setLatausTeksti("Kpl-määrä oltava alle 20");
+    } else if (parseInt(uusikpl) > 40) {
+      setLatausTeksti("Kpl-määrä oltava alle 40");
       fetchData();
     } else if (data == "") {
       await fetch("http://localhost:3004/tuotteet", {
@@ -60,6 +60,7 @@ function Varastosovellus(props) {
         }),
       }).then((response) => {
         console.log(response);
+        setDisabloi(!disabloitu);
         setLatausTeksti("");
         fetchData();
         tyhjenna();
@@ -76,6 +77,7 @@ function Varastosovellus(props) {
 
   async function muokkaatuotetta(id, nimi, hylly, kpl) {
     muokattava = id;
+    setDisabloi(!disabloitu);
     setUusituoteid(id);
     setUusinimi(nimi);
     setUusihylly(hylly);
@@ -126,6 +128,7 @@ function Varastosovellus(props) {
   const [uusinimi, setUusinimi] = useState("");
   const [uusihylly, setUusihylly] = useState("");
   const [uusikpl, setUusikpl] = useState("");
+  const [disabloitu, setDisabloi] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -152,7 +155,7 @@ function Varastosovellus(props) {
         />
       </form>
       <br></br>
-      <Button variant="primary" onClick={() => fetchData()}>
+      <Button variant="info" onClick={() => fetchData()}>
         Hae
       </Button>
       <br></br>
@@ -164,6 +167,7 @@ function Varastosovellus(props) {
         <br></br>
         Tuotteen id:
         <input
+          disabled={disabloitu}
           type="text"
           name="uusituoteid"
           value={uusituoteid}
@@ -194,15 +198,15 @@ function Varastosovellus(props) {
         />
       </form>
       <br></br>
-      <Button variant="primary" onClick={() => uusituote()}>
+      <Button data-testid="tallenna" variant="info" onClick={() => uusituote()}>
         Tallenna
       </Button>
       <br></br>
       <br></br>
-      {latausTeksti}
-      <Table striped hover size="sm" responsive>
+      <p style={{ color: "red", fontWeight: "bold" }}>{latausTeksti}</p>
+      <Table striped bordered hover size="sm" responsive borderColor="primary">
         <thead>
-          <tr className="table-info">
+          <tr>
             <th>Id</th>
             <th>Nimi</th>
             <th>Hylly</th>
@@ -211,27 +215,29 @@ function Varastosovellus(props) {
             <th></th>
           </tr>
         </thead>
-        {tuotelista.map((tuote) => {
-          return (
-            <tbody id="tableBody" key={tuote.id}>
-              <tr>
+        <tbody id="tableBody">
+          {tuotelista.map((tuote) => {
+            return (
+              <tr key={tuote.id}>
                 {" "}
-                <td className="table-info">{tuote.id}</td>
-                <td>{tuote.nimi}</td>
-                <td>{tuote.hylly}</td>
-                <td>{tuote.kpl}</td>
-                <td>
+                <td /* className="table-info" */ width="50">{tuote.id}</td>
+                <td width="100">{tuote.nimi}</td>
+                <td width="100">{tuote.hylly}</td>
+                <td width="100">{tuote.kpl}</td>
+                <td width="100">
                   <Button
-                    variant="outline-secondary"
+                    size="sm"
+                    variant="outline-info"
                     onClick={() => poistatuote(tuote.id)}
                     id={tuote.id}
                   >
                     Poista tuote
                   </Button>
                 </td>
-                <td>
+                <td width="100">
                   <Button
-                    variant="outline-secondary"
+                    size="sm"
+                    variant="outline-info"
                     onClick={() =>
                       muokkaatuotetta(
                         tuote.id,
@@ -246,9 +252,9 @@ function Varastosovellus(props) {
                   </Button>
                 </td>
               </tr>
-            </tbody>
-          );
-        })}{" "}
+            );
+          })}{" "}
+        </tbody>{" "}
       </Table>
     </div>
   );

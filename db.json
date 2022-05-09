@@ -3,32 +3,122 @@
     {
       "id": "1",
       "nimi": "Tavara1",
-      "hylly": "1",
-      "kpl": "9"
+      "hylly": "3",
+      "kpl": "10"
     },
     {
       "id": "2",
       "nimi": "Tavara2",
       "hylly": "2",
-      "kpl": "30"
+      "kpl": "20"
     },
     {
       "id": "3",
       "nimi": "Tavara3",
       "hylly": "1",
-      "kpl": "50"
+      "kpl": "40"
     },
     {
       "id": "4",
-      "nimi": "Tavara4",
+      "nimi": "Tavara 4",
       "hylly": "3",
       "kpl": "6"
     },
     {
+      "id": "5",
+      "nimi": "Tavara 5",
+      "hylly": "1",
+      "kpl": "4"
+    },
+    {
+      "id": "6",
+      "nimi": "Tavara 6",
+      "hylly": "2",
+      "kpl": "6"
+    },
+    {
+      "id": "7",
+      "nimi": "Tavara 7",
+      "hylly": "4",
+      "kpl": "33"
+    },
+    {
+      "id": "8",
+      "nimi": "Tavara 8",
+      "hylly": "2",
+      "kpl": "11"
+    },
+    {
       "id": "9",
-      "nimi": "tuote",
-      "hylly": "hylly",
-      "kpl": "9"
+      "nimi": "Tavara 9",
+      "hylly": "3",
+      "kpl": "10"
+    },
+    {
+      "id": "10",
+      "nimi": "Tavara 10",
+      "hylly": "1",
+      "kpl": "25"
+    },
+    {
+      "id": "11",
+      "nimi": "Tavara 11",
+      "hylly": "1",
+      "kpl": "19"
+    },
+    {
+      "id": "12",
+      "nimi": "Tavara 12",
+      "hylly": "4",
+      "kpl": "21"
+    },
+    {
+      "id": "13",
+      "nimi": "Tavara 13",
+      "hylly": "3",
+      "kpl": "16"
+    },
+    {
+      "id": "14",
+      "nimi": "Tavara 14",
+      "hylly": "2",
+      "kpl": "27"
+    },
+    {
+      "id": "15",
+      "nimi": "Tavara 15",
+      "hylly": "2",
+      "kpl": "14"
+    },
+    {
+      "id": "16",
+      "nimi": "Tavara 16",
+      "hylly": "1",
+      "kpl": "8"
+    },
+    {
+      "id": "17",
+      "nimi": "Tavara 17",
+      "hylly": "3",
+      "kpl": "6"
+    },
+    {
+      "id": "18",
+      "nimi": "Tavara 18",
+      "hylly": "2",
+      "kpl": "34"
+    },
+    {
+      "id": "19",
+      "nimi": "Tavara 19",
+      "hylly": "3",
+      "kpl": "25"
+    },
+    {
+      "id": "20",
+      "nimi": "Tavara 20",
+      "hylly": "4",
+      "kpl": "14"
     }
   ]
 }
